@@ -22,6 +22,8 @@ const SplashScreen = () => {
     
         return () => clearTimeout(timer); // Cleanup the timer on component unmount
       }, [navigation]);
+
+      
     
   return (
     <KeyboardAvoidingView
