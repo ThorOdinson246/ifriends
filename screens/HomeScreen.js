@@ -55,7 +55,6 @@ export default function HomeScreen() {
                 // handle onPress
               }}
             >
-              <FeatherIcon color="#000" name="sliders" size={21} />
             </TouchableOpacity>
           </View>
         </View>
@@ -63,25 +62,25 @@ export default function HomeScreen() {
       <View style={styles.headerLogoContainer}>
         <Image
           style={styles.headerLogo}
-        //   source={require("../assets/ifriends-logo.png")} // Correctly reference the image
+          source={require("../assets/ifriends-logo.png")} // Correctly reference the image
         />
         <View style={styles.headerButtonsContainer}>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/roommate.png")} // Correctly reference the image
+              source={require("../assets/roommate.png")} // Correctly reference the image
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/marketplace.png")} // Correctly reference the image
+              source={require("../assets/marketplace.png")} // Correctly reference the image
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/share-ride.png")} // Correctly reference the image
+              source={require("../assets/share-ride.png")} // Correctly reference the image
             />
           </TouchableOpacity>
           
