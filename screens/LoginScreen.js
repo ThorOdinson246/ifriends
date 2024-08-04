@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '../firebase'
+import HomeScreen from './HomeScreen'
+import { updateLoginStatus,isLoggedIn } from '../global'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -11,13 +13,29 @@ const LoginScreen = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
+// Commented cause implemented in splash screen 
+      // console.log('User is:', user, 'and logged in value is:', isLoggedIn)
+
+      // if (isLoggedIn == true) {
+      //   navigation.replace("Home")
+      //   updateLoginStatus(true)
+      //   console.log('Is already Logged in and logged in value is:', isLoggedIn)
+
+      // }
+      // if (user && isLoggedIn == false) {
       if (user) {
         navigation.replace("Home")
+        updateLoginStatus(true)
+        console.log('Logged in and value is:', isLoggedIn)
+
       }
+      
     })
 
     return unsubscribe
-  }, [])
+  }, [isLoggedIn, navigation, updateLoginStatus])
+
+  // }, [isLoggedIn, navigation, updateLoginStatus])
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
