@@ -8,18 +8,21 @@ import HomeScreen from './screens/HomeScreen';
 import SplashScreen from './screens/SplashScreen';
 import Roommate from './screens/RoommateFinder';
 import RoomFinder from './screens/RoomFinder';
+import MultiFilters from './utils/MultiFilters';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='RoomFinder'>
+      <Stack.Navigator initialRouteName='Filters'>
         <Stack.Screen options={{ headerShown: false }} name="Splash" component={SplashScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Roommate" component={Roommate} />
         <Stack.Screen options={{ headerShown: false }} name="RoomFinder" component={RoomFinder} />
+        <Stack.Screen options={{ headerShown: false }} name="Filters" component={MultiFilters} />
+
 
 
       </Stack.Navigator>
