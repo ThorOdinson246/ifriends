@@ -80,16 +80,12 @@ export default function HomeScreen() {
         <View style={styles.headerTop}>
           <View style={styles.headerAction} />
           <View style={styles.headerAction}>
-<<<<<<< HEAD
             <TouchableOpacity
               onPress={() => {
                 // handle onPress
               }}
             >
             </TouchableOpacity>
-=======
-            <TouchableOpacity onPress={() => {}}></TouchableOpacity>
->>>>>>> 5b094c8d2e800743e8cb497c4e959f4c77da95ce
           </View>
         </View>
       </View>
