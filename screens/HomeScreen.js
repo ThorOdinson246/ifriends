@@ -7,84 +7,107 @@ import {
   View,
   Image,
   Text,
-} 
-from "react-native";
+} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { firestore } from "../firebase";
+import { auth, db, firestore } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import LoginScreen from "./LoginScreen";
+import { isLoggedIn, updateLoginStatus } from "../global";
 
-const places = [
-  {
-    id: 1,
-    img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    name: "Marbella, Spain",
-    dates: "Apr 23 - May 5",
-    price: 200,
-    rating: 4.45,
-    reviews: 124,
-  },
-  {
-    id: 2,
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    name: "Baveno, Italy",
-    dates: "Apr 25 - May 5",
-    price: 320,
-    rating: 4.81,
-    reviews: 409,
-  },
-  {
-    id: 3,
-    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
-    name: "Tucson, Arizona",
-    dates: "Apr 22 - May 4",
-    price: 695,
-    rating: 4.3,
-    reviews: 72,
-  },
-];
+// const places = [
+//   {
+//     id: 1,
+//     img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+//     name: "Marbella, Spain",
+//     dates: "Apr 23 - May 5",
+//     price: 200,
+//     rating: 4.45,
+//     reviews: 124,
+//   },
+//   {
+//     id: 2,
+//     img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+//     name: "Baveno, Italy",
+//     dates: "Apr 25 - May 5",
+//     price: 320,
+//     rating: 4.81,
+//     reviews: 409,
+//   },
+//   {
+//     id: 3,
+//     img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80",
+//     name: "Tucson, Arizona",
+//     dates: "Apr 22 - May 4",
+//     price: 695,
+//     rating: 4.3,
+//     reviews: 72,
+//   },
+// ];
 
 export default function HomeScreen() {
+  const [places, setPlaces] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        const placesCollection = await getDocs(collection(db, "places"));
+        const placesData = placesCollection.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPlaces(placesData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching places: ", error);
+        setLoading(false);
+      }
+    };
+    fetchPlaces();
+  }, []);
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#E0E2DB" }}>
       <View style={styles.header}>
         <View style={styles.headerTop}>
           <View style={styles.headerAction} />
           <View style={styles.headerAction}>
-            <TouchableOpacity
-              onPress={() => {
-                // handle onPress
-              }}
-            >
-              <FeatherIcon color="#000" name="sliders" size={21} />
-            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}}></TouchableOpacity>
           </View>
         </View>
       </View>
       <View style={styles.headerLogoContainer}>
         <Image
           style={styles.headerLogo}
-        //   source={require("../assets/ifriends-logo.png")} // Correctly reference the image
+          source={require("../assets/ifriends-logo.png")} // Correctly reference the image
         />
         <View style={styles.headerButtonsContainer}>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/roommate.png")} // Correctly reference the image
+              source={require("../assets/roommate.png")} // Correctly reference the image
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/marketplace.png")} // Correctly reference the image
+              source={require("../assets/marketplace.png")} // Correctly reference the image
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
-            //   source={require("../assets/share-ride.png")} // Correctly reference the image
+              source={require("../assets/share-ride.png")} // Correctly reference the image
             />
           </TouchableOpacity>
-          
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.content}>
@@ -132,9 +155,24 @@ export default function HomeScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={logOut} style={styles.footerButton}>
+          <Text>'Log Out'</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
+
+const logOut = () => {
+  auth.signOut();
+  updateLoginStatus(false);
+  console.log("Logged out");
+
+  //   // Sign-out successful.
+};
+
 const styles = StyleSheet.create({
   content: {
     paddingTop: 0,
@@ -180,8 +218,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     width: 35,
     height: 35,
-    alignItems:"center",
-    
+    alignItems: "center",
   },
 
   /** Card */
