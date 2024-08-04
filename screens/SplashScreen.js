@@ -18,7 +18,7 @@ const SplashScreen = () => {
             console.log('User is not logged in');
             navigation.navigate("Login");
           }
-        }, 2000); // Adjust the timeout duration as needed
+        }, 2500); // Adjust the timeout duration as needed
     
         return () => clearTimeout(timer); // Cleanup the timer on component unmount
       }, [navigation]);
