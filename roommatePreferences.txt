@@ -1,0 +1,20 @@
+Index(['Email', 'Name', 'Arrival Date', 'Contact Info', 'Home Country',
+       'Religion', 'Study Level', 'Apartment Location', 'Apartment Type',
+       'Looking For', 'Family Status', 'Live With', 'Roommate Preference',
+       'Sexual Orientation', 'SMOKING:  ', 'Studying At Home', 'Social Life',
+       'Sleep Habits', 'Cleanliness', 'Cooking', 'AC Temperature',
+       'Transportation', 'Dietary Restrictions', 'Allergies',
+       'Leisure Activities', 'Qualities', 'Full Name', 'Preferred Name'],
+      dtype='object', name=0)
+
+
+Name 
+Email
+Contact Info 
+Study Level 
+Religion 
+Sex 
+Smoking 
+Study Preferences 
+SOcial Life
+

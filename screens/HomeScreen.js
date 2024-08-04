@@ -14,7 +14,9 @@ import { auth, db, firestore } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import LoginScreen from "./LoginScreen";
 import { isLoggedIn, updateLoginStatus } from "../global";
-
+import { useNavigation } from "@react-navigation/native";
+import RoommateFinder from "./RoommateFinder";
+import RoomFinder from "./RoomFinder";
 // const places = [
 //   {
 //     id: 1,
@@ -46,8 +48,19 @@ import { isLoggedIn, updateLoginStatus } from "../global";
 // ];
 
 export default function HomeScreen() {
+
+  const navigator = useNavigation();
+  
+const onRoommateFinderPress = () => {
+  navigator.navigate("Roommate");
+}
+
+const onRoomFinderPress = () => {
+  navigator.navigate("RoomFinder");
+}
   const [places, setPlaces] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+
 
   React.useEffect(() => {
     const fetchPlaces = async () => {
@@ -75,6 +88,7 @@ export default function HomeScreen() {
     );
   }
   return (
+  
     <SafeAreaView style={{ flex: 1, backgroundColor: "#E0E2DB" }}>
       <View style={styles.header}>
         <View style={styles.headerTop}>
@@ -95,13 +109,21 @@ export default function HomeScreen() {
           source={require("../assets/ifriends-logo.png")} // Correctly reference the image
         />
         <View style={styles.headerButtonsContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => {
+            onRoommateFinderPress();
+          }}
+          style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
               source={require("../assets/roommate.png")} // Correctly reference the image
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity 
+          onPress={() => {
+            onRoomFinderPress();
+          }}
+          style={styles.button}>
             <Image
               style={styles.homebuttonlogo}
               source={require("../assets/marketplace.png")} // Correctly reference the image
@@ -177,6 +199,8 @@ const logOut = () => {
 
   //   // Sign-out successful.
 };
+
+
 
 const styles = StyleSheet.create({
   content: {

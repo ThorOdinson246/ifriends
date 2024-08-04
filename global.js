@@ -8,3 +8,4 @@ const updateLoginStatus = (status) => {
 };
 
 export { isLoggedIn, updateLoginStatus };
+
