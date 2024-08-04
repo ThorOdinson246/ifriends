@@ -1107,3 +1107,4 @@ export const items = [
     "apartmentPricing": "$800+/mo"
   }
 ]
+

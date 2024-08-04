@@ -33,3 +33,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 Roomate Find/ifriends_roommate_finder.csv
+Roomate Find/test_data_roommate_filter.csv
+utils/filteritems.js
+Roomate Find/test_data_roommate_filter.csv
