@@ -52,7 +52,7 @@ export default function HomeScreen() {
   const navigator = useNavigation();
   
 const onRoommateFinderPress = () => {
-  navigator.navigate("Roommate");
+  navigator.navigate("Filters2");
 }
 
 const onRoomFinderPress = () => {
